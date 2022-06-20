@@ -136,6 +136,30 @@ console.log(
   ---------------------------------------
 */
 
+function removeFromCart(productId) {
+  let selectedItem = productsInCart.find((item) => productId == item.id);
+  selectedItem.quantity -= 1;
+  if (selectedItem.quantity <= 0) {
+    let itemIndex = productsInCart.findIndex(
+      (item) => item.id == selectedItem.id
+    );
+    productsInCart.splice(itemIndex, 1);
+    return productsInCart;
+  } else {
+    return selectedItem.quantity;
+  }
+}
+
+const getTitleFromId = (productId) =>
+  productsInCart.find((item) => item.id == productId).title;
+
+console.log(
+  `Remove one ${getTitleFromId(656765)}, you now have`,
+  removeFromCart(656765)
+);
+
+console.log(removeFromCart(098394));
+
 /*
   ---------------------------------------
   printCart: stampa su console tutti i prodotti divisi per categoria. 
