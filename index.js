@@ -183,3 +183,10 @@ console.log(removeFromCart(098394));
   ---------------------------------------
 
 */
+
+const getPizzeBianche = () =>
+  productsInCart.filter(
+    (item) => item.category === 0 && !item.ingredients.includes("pomodoro")
+  );
+
+console.log("Pizze bianche:", getPizzeBianche());
