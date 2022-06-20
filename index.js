@@ -3,91 +3,92 @@
     implementare alcune funzionalità per la gestione del carrello.
 */
 
-
 //prodotti attualmente presenti nel carrello dell'utente
-const productsInCart = [{
-  id: 324234,
-  category: 0,
-  quantity: 1,
-  title: 'Margherita',
-  description: "Pomodoro, mozzarella e basilico",
-  ingredients: ['pomodoro', 'mozzarella', 'basilico'],
-  price: 6.5
-},
-{
-  id: 098394,
-  category: 0,
-  quantity: 1,
-  title: 'Calzone Classico',
-  description: "Ripieno di Pomodoro, mozzarella e prosciutto cotto",
-  ingredients: ['pomodoro', 'mozzarella', 'prosciutto cotto'],
-  price: 7.0
-},
-{
-  id: 432432,
-  category: 4,
-  quantity: 1,
-  title: 'Coca Cola Zero (33CL)',
-  description: "",
-  price: 3.0
-},
-{
-  id: 564564,
-  category: 0,
-  quantity: 1,
-  title: 'Salamino',
-  description: "Pomodoro, mozzarella e salamino piccante",
-  ingredients: ['pomodoro', 'mozzarella', 'salamino'],
-  price: 7.5
-},
-{
-  id: 564564,
-  category: 0,
-  quantity: 1,
-  title: 'Salamino',
-  description: "Mozzarella, salsiccia, patate al forno",
-  ingredients: ['mozzarella', 'salsiccia', 'patate al forno'],
-  price: 7.5
-},
-{
-  id: 333445,
-  category: 4,
-  quantity: 1,
-  title: 'Acqua Naturale (1L)',
-  description: "",
-  price: 2
-},
-{
-  id: 656765,
-  category: 3,
-  quantity: 3,
-  title: 'Cheesecake Cioccolato',
-  description: "Dolce a base di formaggio fresco e topping al cioccolato",
-  price: 5
-},
-]
+const productsInCart = [
+  {
+    id: 324234,
+    category: 0,
+    quantity: 1,
+    title: "Margherita",
+    description: "Pomodoro, mozzarella e basilico",
+    ingredients: ["pomodoro", "mozzarella", "basilico"],
+    price: 6.5,
+  },
+  {
+    id: 098394,
+    category: 0,
+    quantity: 1,
+    title: "Calzone Classico",
+    description: "Ripieno di Pomodoro, mozzarella e prosciutto cotto",
+    ingredients: ["pomodoro", "mozzarella", "prosciutto cotto"],
+    price: 7.0,
+  },
+  {
+    id: 432432,
+    category: 4,
+    quantity: 1,
+    title: "Coca Cola Zero (33CL)",
+    description: "",
+    price: 3.0,
+  },
+  {
+    id: 564564,
+    category: 0,
+    quantity: 1,
+    title: "Salamino",
+    description: "Pomodoro, mozzarella e salamino piccante",
+    ingredients: ["pomodoro", "mozzarella", "salamino"],
+    price: 7.5,
+  },
+  {
+    id: 564564,
+    category: 0,
+    quantity: 1,
+    title: "Salamino",
+    description: "Mozzarella, salsiccia, patate al forno",
+    ingredients: ["mozzarella", "salsiccia", "patate al forno"],
+    price: 7.5,
+  },
+  {
+    id: 333445,
+    category: 4,
+    quantity: 1,
+    title: "Acqua Naturale (1L)",
+    description: "",
+    price: 2,
+  },
+  {
+    id: 656765,
+    category: 3,
+    quantity: 3,
+    title: "Cheesecake Cioccolato",
+    description: "Dolce a base di formaggio fresco e topping al cioccolato",
+    price: 5,
+  },
+];
 
 //array statico di oggetti che contiene tutte le categorie presenti nell'app
-const categories = [{
-  id: 0,
-  name: "pizze"
-},
-{
-  id: 1,
-  name: "panini"
-},
-{
-  id: 2,
-  name: "sushi"
-},
-{
-  id: 3,
-  name: "dessert"
-},
-{
-  id: 4,
-  name: "bevande"
-},
+const categories = [
+  {
+    id: 0,
+    name: "pizze",
+  },
+  {
+    id: 1,
+    name: "panini",
+  },
+  {
+    id: 2,
+    name: "sushi",
+  },
+  {
+    id: 3,
+    name: "dessert",
+  },
+  {
+    id: 4,
+    name: "bevande",
+  },
 ];
 
 //FUNZIONI DA IMPLEMENTARE:
@@ -98,10 +99,10 @@ const categories = [{
   ---------------------------------------
 */
 function getTotalAmount() {
-return productsInCart.reduce((sum, product) => sum + product.price, 0)
+  return productsInCart.reduce((sum, product) => sum + product.price, 0);
 }
 
-console.log(getTotalAmount());
+console.log("Total amount:", getTotalAmount());
 
 /* 
   ---------------------------------------
@@ -109,15 +110,25 @@ console.log(getTotalAmount());
   ---------------------------------------
 */
 
-const getCategoryCode = (categoryName) => categories.find((category) => category.name == categoryName) ? .id
+const getCategoryCode = (categoryName) =>
+  categories.find((category) => category.name == categoryName)?.id;
 
-console.log(getCategoryCode('pizzee'));
+console.log("Category code for 'pizze':", getCategoryCode("pizze"));
+console.log("Category code for 'pizzee':", getCategoryCode("pizzee"));
+
 /*
   ---------------------------------------
   getCategoryCount: prende come parametro il nome di una categoria e restituisce il numero di prodotti presenti per questa
   ---------------------------------------
 */
 
+const getCategoryCount = (categoryName) =>
+  productsInCart.filter((item) => item.category == categoryName).length;
+
+console.log(
+  "Number of 'pizze' items:",
+  getCategoryCount(getCategoryCode("pizze"))
+);
 
 /*
   ---------------------------------------
