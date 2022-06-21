@@ -99,7 +99,10 @@ const categories = [
   ---------------------------------------
 */
 function getTotalAmount() {
-  return productsInCart.reduce((sum, product) => sum + product.price, 0);
+  return productsInCart.reduce(
+    (sum, product) => sum + product.price * product.quantity,
+    0
+  );
 }
 
 console.log("Total amount:", getTotalAmount());
@@ -138,27 +141,24 @@ console.log(
 
 function removeFromCart(productId) {
   let selectedItem = productsInCart.find((item) => productId == item.id);
+
+  console.log("Remove 1 of", selectedItem.quantity, selectedItem.title);
   selectedItem.quantity -= 1;
+
   if (selectedItem.quantity <= 0) {
     let itemIndex = productsInCart.findIndex(
       (item) => item.id == selectedItem.id
     );
     productsInCart.splice(itemIndex, 1);
-    return productsInCart;
+    return console.log("your order has been updated:", productsInCart);
   } else {
-    return selectedItem.quantity;
+    return console.log("you now have", selectedItem.quantity);
   }
 }
 
-const getTitleFromId = (productId) =>
-  productsInCart.find((item) => item.id == productId).title;
+removeFromCart(656765);
 
-console.log(
-  `Remove one ${getTitleFromId(656765)}, you now have`,
-  removeFromCart(656765)
-);
-
-console.log(removeFromCart(098394));
+removeFromCart(098394);
 
 /*
   ---------------------------------------
@@ -176,6 +176,45 @@ console.log(removeFromCart(098394));
       16.5€
   ---------------------------------------
 */
+
+function printCart() {
+  let pizze = productsInCart.filter((item) => item.category == 0);
+  let dessert = productsInCart.filter((item) => item.category == 3);
+  let bevande = productsInCart.filter((item) => item.category == 4);
+  let totale = productsInCart.reduce(
+    (sum, product) => sum + product.price * product.quantity,
+    0
+  );
+
+  console.log("*** PIZZE ***");
+
+  pizze.map((item) =>
+    console.log(
+      `- ${item.quantity} x ${item.title} (${item.ingredients}) | €${item.price}`
+    )
+  );
+
+  console.log("*** DESSERT ***");
+
+  dessert.map((item) =>
+    console.log(
+      `- ${item.quantity} x ${item.title} (${item.ingredients}) | €${item.price}`
+    )
+  );
+
+  console.log("*** BEVANDE ***");
+
+  bevande.map((item) =>
+    console.log(
+      `- ${item.quantity} x ${item.title} (${item.ingredients}) | €${item.price}`
+    )
+  );
+
+  console.log("*** TOTALE ***");
+  console.log(totale);
+}
+
+printCart();
 
 /*
   ---------------------------------------
